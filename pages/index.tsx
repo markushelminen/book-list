@@ -40,8 +40,8 @@ const Home: NextPage = () => {
       <Head>
         <title>Book list</title>
       </Head>
-      <h1 className="text-2xl text-gray-50">Book list</h1>
-      <div className="p-8"></div>
+      <h1 className="text-3xl font-semibold text-gray-50">Book list</h1>
+      <div className="p-4"></div>
       <div className="flex flex-col ">
         {data &&
           data.map((book) => <Book key={book.entityId} book={book}></Book>)}

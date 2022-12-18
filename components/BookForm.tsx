@@ -5,7 +5,7 @@ export default function bookForm({ book }: { book: Book }) {
   const [newBook, setBook] = useState<Book>(book);
 
   const btn =
-    "bg-blue-500 shadow-s hover:bg-blue-700 font-bold py-2 px-4 my-2 rounded";
+    "bg-gray-50 shadow-s text-gray-800 hover:bg-gray-200 font-semibold py-2 px-4 my-2 rounded";
   const addBook = async () => {
     console.log("New Book");
     const res = await fetch("/api/books", {
@@ -46,13 +46,13 @@ export default function bookForm({ book }: { book: Book }) {
   };
 
   return (
-    <div className="bg-gray-400">
-      <h2 className="text-xl text-gray-50">Book</h2>
+    <div className="bg-slate-600 h-full sm:w-96 text-gray-50">
+      <h2 className="text-2xl text-gray-50 text-center pt-4">Book</h2>
       <div className="flex flex-col p-4">
-        <div className="">
-          <label>Title</label>
+        <div className="flex flex-col">
+          <label className="">Title</label>
           <input
-            className="text-gray-800"
+            className=" bg-gray-800 rounded-md p-2"
             type="text"
             name="title"
             value={newBook.title}
@@ -62,10 +62,10 @@ export default function bookForm({ book }: { book: Book }) {
           />
         </div>
         <div className="p-2"></div>
-        <div className="">
+        <div className="flex flex-col">
           <label>Author</label>
           <input
-            className="text-gray-800"
+            className="bg-gray-800 rounded-md p-2"
             type="text"
             name="author"
             value={newBook.author}
@@ -75,10 +75,10 @@ export default function bookForm({ book }: { book: Book }) {
           />
         </div>
         <div className="p-2"></div>
-        <div className="">
+        <div className="flex flex-col">
           <label>Description</label>
           <textarea
-            className="text-gray-800"
+            className="h-96 bg-gray-800 rounded-md p-2"
             name="description"
             value={newBook.description}
             onChange={(e) => {
@@ -87,14 +87,17 @@ export default function bookForm({ book }: { book: Book }) {
           ></textarea>
         </div>
         <div className="p-2"></div>
-        <div className="flex">
+        <div className="flex justify-between">
           <button className={btn} onClick={addBook}>
             Save New
           </button>
           <button className={btn} onClick={updateBook}>
             Save
           </button>
-          <button className={btn} onClick={deleteBook}>
+          <button
+            className={`${btn} bg-red-300 hover:bg-red-400`}
+            onClick={deleteBook}
+          >
             Delete
           </button>
         </div>

@@ -29,7 +29,6 @@ const Home: NextPage = () => {
   const { data, error, isLoading } = useSWR<Book[]>("/api/books", fetcher);
   if (error) return <div>Error</div>;
   if (isLoading) return <div>Loading ...</div>;
-  if (data) console.log(data);
 
   const editBook = (book: Book) => {
     setBook(book);
@@ -37,15 +36,22 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center py-2">
+    <div className="flex min-h-screen flex-col items-center py-4">
       <Head>
         <title>Book list</title>
       </Head>
       <h1 className="text-2xl text-gray-50">Book list</h1>
       <div className="p-8"></div>
-      <div className="flex p-6 max-w-2xl mx-auto bg-slate-600 rounded-xl shadow-md items-center space-x-4">
+      <div className="flex flex-col ">
         {data &&
           data.map((book) => <Book key={book.entityId} book={book}></Book>)}
+        {data?.length === 0 && (
+          <button
+            onClick={() => editBook({ author: "", description: "", title: "" })}
+          >
+            Add book
+          </button>
+        )}
       </div>
       <Drawer open={open} onClose={() => setOpen(false)}>
         {book && <BookForm book={book}></BookForm>}
@@ -54,12 +60,26 @@ const Home: NextPage = () => {
   );
 
   function Book({ book }: { book: Book }) {
-    const { title, author } = book;
+    const { title, author, description } = book;
     return (
       <>
-        <div className="cursor-pointer" onClick={() => editBook(book)}>
-          <h2 id="title">{title}</h2>
-          <h5 id="author">{author}</h5>
+        <div
+          className="cursor-pointer p-6 w-3/4 mx-auto bg-slate-600 rounded-md items-center my-4"
+          onClick={() => editBook(book)}
+        >
+          <h2 className="font-medium text-xl pb-2" id="title">
+            {title}
+          </h2>
+          <div className="flex">
+            <div className="flex flex-col pr-4">
+              <label>Author</label>
+              <label>Description</label>
+            </div>
+            <div className="flex flex-col">
+              <h5 id="author">{author}</h5>
+              <p id="description">{description}</p>
+            </div>
+          </div>
         </div>
       </>
     );

@@ -7,7 +7,6 @@ export default function bookForm({ book }: { book: Book }) {
   const btn =
     "bg-gray-50 shadow-s text-gray-800 hover:bg-gray-200 font-semibold py-2 px-4 my-2 rounded";
   const addBook = async () => {
-    console.log("New Book");
     const res = await fetch("/api/books", {
       body: JSON.stringify(newBook),
       headers: {
@@ -46,7 +45,7 @@ export default function bookForm({ book }: { book: Book }) {
   };
 
   return (
-    <div className="bg-slate-600 h-full sm:w-96 text-gray-50">
+    <div className="bg-slate-600 h-full sm:w-[32rem] lg:w-[48rem] text-gray-50">
       <h2 className="text-2xl text-gray-50 text-center pt-4">Book</h2>
       <div className="flex flex-col p-4">
         <div className="flex flex-col">
@@ -78,7 +77,7 @@ export default function bookForm({ book }: { book: Book }) {
         <div className="flex flex-col">
           <label>Description</label>
           <textarea
-            className="h-96 bg-gray-800 rounded-md p-2"
+            className="h-96 bg-gray-800 rounded-md p-2 overflow-y-auto"
             name="description"
             value={newBook.description}
             onChange={(e) => {
@@ -87,13 +86,15 @@ export default function bookForm({ book }: { book: Book }) {
           ></textarea>
         </div>
         <div className="p-2"></div>
-        <div className="flex justify-between">
+        <div className="flex justify-end">
           <button className={btn} onClick={addBook}>
             Save New
           </button>
+          <div className="px-2"></div>
           <button className={btn} onClick={updateBook}>
             Save
           </button>
+          <div className="px-2"></div>
           <button
             className={`${btn} bg-red-300 hover:bg-red-400`}
             onClick={deleteBook}

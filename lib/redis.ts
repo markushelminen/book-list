@@ -20,9 +20,9 @@ const schema = new Schema(
     dataStructure: "JSON",
   }
 );
+const repo = client.fetchRepository(schema);
 
 export async function getRepo() {
-  const repo = client.fetchRepository(schema);
   await repo.createIndex();
   return repo;
 }

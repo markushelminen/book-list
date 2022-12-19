@@ -1,19 +1,15 @@
 import { Client, Entity, Schema } from "redis-om";
 
-const client = new Client();
+const client = await new Client().open(process.env.REDIS_URL);
 
-async function connect() {
-  if (!client.isOpen()) {
-    await client.open(process.env.REDIS_URL);
-  }
+interface Book {
+  title: string;
+  author: string;
+  description: string;
 }
 
-class Book extends Entity {
-  title: any;
-  author: any;
-  description: any;
-}
-let schema = new Schema(
+class Book extends Entity {}
+const schema = new Schema(
   Book,
   {
     title: { type: "string" },
@@ -26,7 +22,6 @@ let schema = new Schema(
 );
 
 export async function getRepo() {
-  await connect();
   const repo = client.fetchRepository(schema);
   await repo.createIndex();
   return repo;

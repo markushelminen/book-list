@@ -80,15 +80,16 @@ const Home: NextPage = () => {
           <h2 className="font-medium text-xl pb-2" id="title">
             {title}
           </h2>
-          <div className="flex">
-            <div className="flex flex-col pr-4">
-              <label>Author</label>
-              <label>Description</label>
-            </div>
-            <div className="flex flex-col">
-              <h5 id="author">{author}</h5>
-              <p id="description">{description}</p>
-            </div>
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-6">
+            <label className="font-medium md:col-span-1">Author</label>
+            <h5 id="author" className="md:col-start-2 md:col-end-7">
+              {author}
+            </h5>
+
+            <label className="font-medium md:col-start-1">Description</label>
+            <p id="description" className="md:col-start-2 md:col-end-7">
+              {description}
+            </p>
           </div>
         </div>
       </>

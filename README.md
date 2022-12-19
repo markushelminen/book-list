@@ -1,27 +1,36 @@
-# Next.js + Tailwind CSS Example
+# Book-list Fullstack App
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This is Buuttis full stack task as outlined in the pdf
 
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+## Build with
+- React
+- Next.js
+- Tailwind CSS
+- TypeScript
+- Cypress
+- Redis
+- Material UI
 
 ## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+first fork the project with your preferred method
+then install the dependencies
 
 ```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+npm install
 ```
+start the application by running:
 
 ```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
+npm run dev
+```
+then the application should be visible in localhost:3000
+
+run the following while the app is running in the background to e2e test the application
+```bash
+npm test
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### Other
+Redis is running on redislabs with their free tier. Redis url is visible in the .env.local file with passwords and all.
+
+If you encounter a connection error it probably is because the free tier has run out of connections so just restart the dev server and it should work. :)

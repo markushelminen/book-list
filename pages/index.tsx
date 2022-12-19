@@ -48,7 +48,7 @@ const Home: NextPage = () => {
       </Head>
       <h1 className="text-3xl font-semibold text-gray-50">Book list</h1>
       <div className="p-4"></div>
-      <div className="flex flex-col w-3/6">
+      <div className="flex flex-col w-5/6 lg:w-3/6">
         {data &&
           data.map((book) => (
             <BookListItem

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Book } from "../pages/index";
 
-export default function bookForm({ book }: { book: Book }) {
+interface bookFormProps {
+  book: Book;
+  onChange: Function;
+}
+
+export default function bookForm({ book, onChange }: bookFormProps) {
   const [newBook, setBook] = useState<Book>(book);
 
   const btn =
@@ -17,6 +22,7 @@ export default function bookForm({ book }: { book: Book }) {
 
     const result = await res.json();
     console.log(result);
+    onChange();
   };
 
   const updateBook = async () => {
@@ -31,6 +37,7 @@ export default function bookForm({ book }: { book: Book }) {
 
     const result = await res.json();
     console.log(result);
+    onChange();
   };
 
   const deleteBook = async () => {
@@ -42,6 +49,7 @@ export default function bookForm({ book }: { book: Book }) {
     });
     const result = await res.json();
     console.log(result);
+    onChange();
   };
 
   return (
@@ -90,17 +98,25 @@ export default function bookForm({ book }: { book: Book }) {
           <button className={btn} onClick={addBook}>
             Save New
           </button>
-          <div className="px-2"></div>
-          <button className={btn} onClick={updateBook}>
-            Save
-          </button>
-          <div className="px-2"></div>
-          <button
-            className={`${btn} bg-red-300 hover:bg-red-400`}
-            onClick={deleteBook}
-          >
-            Delete
-          </button>
+          {newBook.entityId && (
+            <>
+              <div className="px-2"></div>
+              <button className={btn} onClick={updateBook}>
+                Save
+              </button>
+            </>
+          )}
+          {newBook.entityId && (
+            <>
+              <div className="px-2"></div>
+              <button
+                className={`${btn} bg-red-300 hover:bg-red-400`}
+                onClick={deleteBook}
+              >
+                Delete
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

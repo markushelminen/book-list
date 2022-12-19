@@ -26,7 +26,10 @@ export async function fetcher<JSON = any>(
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [book, setBook] = useState<Book>();
-  const { data, error, isLoading } = useSWR<Book[]>("/api/books", fetcher);
+  const { data, error, mutate, isLoading } = useSWR<Book[]>(
+    "/api/books",
+    fetcher
+  );
   if (error) return <div>Error</div>;
   if (isLoading) return <div>Loading ...</div>;
 
@@ -34,6 +37,11 @@ const Home: NextPage = () => {
     setBook(book);
     setOpen(true);
   };
+
+  function closeAndMutate() {
+    mutate();
+    setOpen(false);
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center py-4">
@@ -54,7 +62,9 @@ const Home: NextPage = () => {
         )}
       </div>
       <Drawer open={open} onClose={() => setOpen(false)}>
-        {book && <BookForm book={book}></BookForm>}
+        {book && (
+          <BookForm book={book} onChange={() => closeAndMutate()}></BookForm>
+        )}
       </Drawer>
     </div>
   );

@@ -4,10 +4,8 @@ import Head from "next/head";
 import { useState } from "react";
 import useSWR from "swr";
 import BookForm from "../components/BookForm";
+import BookListItem from "../components/BookListItem";
 
-interface Data {
-  data: Book[];
-}
 export interface Book {
   title: string;
   author: string;
@@ -50,9 +48,15 @@ const Home: NextPage = () => {
       </Head>
       <h1 className="text-3xl font-semibold text-gray-50">Book list</h1>
       <div className="p-4"></div>
-      <div className="flex flex-col ">
+      <div className="flex flex-col w-3/6">
         {data &&
-          data.map((book) => <Book key={book.entityId} book={book}></Book>)}
+          data.map((book) => (
+            <BookListItem
+              key={book.entityId}
+              editBook={() => editBook(book)}
+              book={book}
+            ></BookListItem>
+          ))}
         {data?.length === 0 && (
           <button
             onClick={() => editBook({ author: "", description: "", title: "" })}
@@ -68,33 +72,6 @@ const Home: NextPage = () => {
       </Drawer>
     </div>
   );
-
-  function Book({ book }: { book: Book }) {
-    const { title, author, description } = book;
-    return (
-      <>
-        <div
-          className="cursor-pointer p-6 w-3/4 mx-auto bg-slate-600 rounded-md items-center my-4"
-          onClick={() => editBook(book)}
-        >
-          <h2 className="font-medium text-xl pb-2" id="title">
-            {title}
-          </h2>
-          <div className="grid grid-cols-1 gap-2 md:grid-cols-6">
-            <label className="font-medium md:col-span-1">Author</label>
-            <h5 id="author" className="md:col-start-2 md:col-end-7">
-              {author}
-            </h5>
-
-            <label className="font-medium md:col-start-1">Description</label>
-            <p id="description" className="md:col-start-2 md:col-end-7">
-              {description}
-            </p>
-          </div>
-        </div>
-      </>
-    );
-  }
 };
 
 export default Home;

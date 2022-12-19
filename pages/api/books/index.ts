@@ -8,7 +8,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   switch (method) {
     case "GET":
       try {
-        const books = await repository.search().returnAll({ pageSize: 100 });
+        const books = await repository.search().return.all();
+        /** reverse the books array so the most recently modified is on top */
+        books.reverse();
         return res.status(200).json(books);
       } catch (error: any) {
         return res.status(400).json({ message: error.message });

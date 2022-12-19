@@ -95,13 +95,13 @@ export default function bookForm({ book, onChange }: bookFormProps) {
         </div>
         <div className="p-2"></div>
         <div className="flex justify-end">
-          <button className={btn} onClick={addBook}>
+          <button name="save-new" className={btn} onClick={addBook}>
             Save New
           </button>
           {newBook.entityId && (
             <>
               <div className="px-2"></div>
-              <button className={btn} onClick={updateBook}>
+              <button name="save" className={btn} onClick={updateBook}>
                 Save
               </button>
             </>
@@ -110,6 +110,7 @@ export default function bookForm({ book, onChange }: bookFormProps) {
             <>
               <div className="px-2"></div>
               <button
+                name="delete"
                 className={`${btn} bg-red-300 hover:bg-red-400`}
                 onClick={deleteBook}
               >

@@ -13,6 +13,7 @@ export interface Book {
   entityId?: string;
 }
 
+/** Helper function for SWR to infer types fetched more info https://swr.vercel.app/docs/typescript */
 export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
       </Head>
       <h1 className="text-3xl font-semibold text-gray-50">Book list</h1>
       <div className="p-4"></div>
-      <div className="flex flex-col w-5/6 lg:w-3/6">
+      <div data-test-id="book-list" className="flex flex-col w-5/6 lg:w-3/6">
         {data &&
           data.map((book) => (
             <BookListItem

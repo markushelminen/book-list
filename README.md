@@ -31,6 +31,6 @@ npm test
 ```
 
 ### Other
-Redis is running on redislabs with their free tier. Redis url is visible in the .env.local file with passwords and all.
+Redis is running on redislabs with their free tier. Redis url is visible in the redis.ts file with passwords and all.
 
 If you encounter a connection error it probably is because the free tier has run out of connections so just restart the dev server and it should work. :)

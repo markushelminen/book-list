@@ -1,6 +1,8 @@
 import { Client, Entity, Schema } from "redis-om";
 
-const client = await new Client().open(process.env.REDIS_URL);
+const client = await new Client().open(
+  "redis://default:7CNKAkAfw2WWcB9FtLzq998rUoutJKgJ@redis-18241.c293.eu-central-1-1.ec2.cloud.redislabs.com:18241"
+);
 
 interface Book {
   title: string;
